@@ -6,9 +6,9 @@ Dim cCl_ValidaData
 
 Dim cCl_AtualizaProg
 
-'//Luiz T.I. - Chamado 2188 | 28/05/2026 16:56 Parte 1 - Início (Alterar programação de entrega para todos os itens dos pedidos de venda do grid)
+'//Luiz T.I. - Chamado 2188 | 10/06/2026 09:09 Parte 1 - Início (Alterar programação de entrega para todos os itens dos pedidos de venda do grid)
 Dim Ed_AlterarData
-'//Luiz T.I. - Chamado 2188 | 28/05/2026 16:56 Parte 1 - Fim
+'//Luiz T.I. - Chamado 2188 | 10/06/2026 09:09 Parte 1 - Fim
 
 Sub OnFormCreate
   With FORM_FS_PROG_ENTREGA
@@ -274,7 +274,7 @@ Sub OnFormCreate
       Enabled = vAberto
     End With
 
-    '//Luiz T.I. - Chamado 2188 | 28/05/2026 16:56 Parte 2 - Início
+    '//Luiz T.I. - Chamado 2188 | 10/06/2026 09:09 Parte 2 - Início
     Ed_AlterarData = New TMgCheckBox(FormAtivo)
     With Ed_AlterarData
       '//DataSource = cDs_PedProg
@@ -287,7 +287,7 @@ Sub OnFormCreate
       Enabled    = vAberto
       Checked    = False
     End With
-    '//Luiz T.I. - Chamado 2188 | 28/05/2026 16:56 Parte 2 - Fim
+    '//Luiz T.I. - Chamado 2188 | 10/06/2026 09:09 Parte 2 - Fim
 
     With cCL_LogPedProg
       OnBeforeOpen  = AddressOf cCl_PedProg_OnBeforeOpen
@@ -430,7 +430,7 @@ Sub BO_Ok_OnAfterClick
       RaiseException("")
     End If
 
-    '//Luiz T.I. - Chamado 2188 | 28/05/2026 16:56 Parte 3 - Início
+    '//Luiz T.I. - Chamado 2188 | 10/06/2026 09:09 Parte 3 - Início
     Dim Cl_DadosAux = FormAtivo.Owner.FindComponent("Cl_Dados") '//Pega o grid da tela principal
 
     If Ed_AlterarData.Checked Then
@@ -490,7 +490,7 @@ Sub BO_Ok_OnAfterClick
       End If
 
     Else
-    '//Luiz T.I. - Chamado 2188 | 28/05/2026 16:56 Parte 3 - Fim
+    '//Luiz T.I. - Chamado 2188 | 10/06/2026 09:09 Parte 3 - Fim
 
     If cCl_PedProg.FieldByName("IPE_IN_SITUACAO_AB").AsInteger > 0 Then
 
@@ -531,8 +531,8 @@ Sub BO_Ok_OnAfterClick
 
     End With
 
-    '//Luiz T.I. - Chamado 2188 | 28/05/2026 16:56 Parte 4 - Início
+    '//Luiz T.I. - Chamado 2188 | 10/06/2026 09:09 Parte 4 - Início
     End If
-    '//Luiz T.I. - Chamado 2188 | 28/05/2026 16:56 Parte 4 - Fim
+    '//Luiz T.I. - Chamado 2188 | 10/06/2026 09:09 Parte 4 - Fim
   End With
 End Sub

@@ -8,9 +8,9 @@ Dim Ds_Lk_Cliente      , Ds_Lk_Itens, Ds_Lk_Grupos, Ds_Lk_SubGrupos
 Dim Cl_Lk_Representante, Ds_Lk_Representante, Lk_Representante
 Dim Cl_Lk_TipoDoc      , Ds_Lk_TipoDoc, Lk_TipoDoc
 
-'//Luiz T.I. 29/05/2026 16:41 | Parte 1 - Início (Chamado 2188 - Alterar programação de entrega para todos os itens dos pedidos de venda do grid)
+'//Luiz T.I. 10/06/2026 08:10 | Chamado 2188 Parte 1 - Início (Chamado 2188 - Alterar programação de entrega para todos os itens dos pedidos de venda do grid)
 Dim cCl_GrupoCliente, cDs_GrupoCliente, cLk_GrupoCliente
-'//Luiz T.I. 29/05/2026 16:41 | Parte 1 - Fim
+'//Luiz T.I. 10/06/2026 08:10 | Chamado 2188 Parte 1 - Fim
 
 '//DataSet's das Tabelas Customizadas
 Dim Cl_Fs_PedidoVendaGer, _
@@ -65,11 +65,10 @@ Dim Cl_ExcluiOEPedido
 Dim Cl_FS_APT_APONTAORDEM, Cl_Update_Cl_FS_APT_APONTAORDEM
 Dim vAbreTela AS String = "S"
 
+Dim Mi_LogLiberacao, Mi_LogLiberacaoPed '// Matheus H. 09/04/2026
+
 Dim Pm_Acoes, Mi_Clientes, Mi_Itens, Mi_Clientes_Itens, Mi_Saldos, Mi_Saldos_Grupo, Mi_Historico
 Dim Mi_Ocorrencia, Mi_Hist_Prog, Mi_Embalagem, Mi_Excluir_Ped, Mi_Commissoes, Mi_ProgCorte, Mi_LogRomaneio
-
-Dim Mi_LogLiberacao, Mi_LogLiberacaoPed '// Matheus H. 25/02/2026
-
 Dim Mi_Separador, Mi_PedProg, Mi_AlteraComissao, Mi_Romaneio, Mi_Romaneio_OE
 
 '// Verifica Data Horizonte - Herbert
@@ -157,12 +156,12 @@ Sub OnFormCreate
       Pm_Acoes.Items.Add(Mi_Commissoes)
 
       Mi_LogRomaneio = new TMenuItem(FormAtivo)
-      Mi_LogRomaneio.Caption = "Histórico de Criação de Romaneio"
+      Mi_LogRomaneio.Caption = "Log de Criação de Romaneio"
       Mi_LogRomaneio.OnClick =AddressOf Bt_LogCriacaoRomaneio_OnAfterClick
       Mi_LogRomaneio.Name    = "Mi_LogRomaneio"
       Pm_Acoes.Items.Add(Mi_LogRomaneio)
 
-     '// Matheus H. 25/02/2026 Início
+        '// Matheus H. 09/04/2026 Início
 
       Mi_LogLiberacao = new TMenuItem(FormAtivo)
       Mi_LogLiberacao.Caption = "Histórico de Liberações de OE"
@@ -170,7 +169,7 @@ Sub OnFormCreate
       Mi_LogLiberacao.Name    = "Mi_LogLiberacao"
       Pm_Acoes.Items.Add(Mi_LogLiberacao)
 
-     '// Matheus H. 25/02/2026 Fim
+     '// Matheus H. 09/04/2026 Fim
 
      '// Matheus H. 09/04/2026 Início
 
@@ -356,6 +355,7 @@ Sub OnFormCreate
       Bt_ExcluirOePedido.OnAfterClick       = AddressOf Bt_ExcluirOePedido_OnAfterClick()
       Bt_Comissao.OnAfterClick              = AddressOf Bt_Comissao_OnAfterClick()
       Bt_LogCriacaoRomaneio.OnAfterClick    = AddressOf Bt_LogCriacaoRomaneio_OnAfterClick()
+
       '//cBt_LogLiberacao.OnAfterClick         = AddressOf cBt_LogLiberacao_OnAfterClick()  '// Matheus H. 25/02/2026
 
       Bt_ExcluirOE.Enabled = False
@@ -758,7 +758,7 @@ Sub OnFormCreate
         Lookup       = Lk_Grupos
       End With
 
-      '//Luiz T.I. 29/05/2026 16:41 | Parte 2 - Início
+      '//Luiz T.I. 10/06/2026 08:10 | Chamado 2188 Parte 2 - Início
       cCl_GrupoCliente = new TmgClientDataSet(FormAtivo)
       With cCl_GrupoCliente
         OnAfterOpen = AddressOf cCl_GrupoCliente_OnAfterOpen()
@@ -799,7 +799,7 @@ Sub OnFormCreate
         LookupFields = "FCC_IN_CODIGO"
         Lookup       = cLk_GrupoCliente
       End With
-      '//Luiz T.I. 29/05/2026 16:41 | Parte 2 - Fim
+      '//Luiz T.I. 10/06/2026 08:10 | Chamado 2188 Parte 2 - Fim
 
       '//--------------------------------------//
       With Cl_Lk_SubGrupos
@@ -924,7 +924,7 @@ Sub OnFormCreate
         Sql.Add("        (T.GER_RE_QUANTIDADE - T.IPE_RE_QTDEFATURADA) IPE_RE_QTDERESFAT,")
 
         Sql.Add("(T.ITP_RE_VALORUNITARIOCONV * ")
-        Sql.Add("(T.GER_RE_QUANTIDADE - T.IPE_RE_QTDEFATURADA)) VALOR_RESERVADO_A_FATURAR,") '// Matheus H. - Inclusão coluna em grid principal. | 22/04/2026
+        Sql.Add("(T.GER_RE_QUANTIDADE - T.IPE_RE_QTDEFATURADA)) VALOR_RESERVADO_A_FATURAR,")'// Matheus H. - Inclusão coluna em grid principal. | 22/04/2026
 
         Sql.Add("        NVL(CUS_PCK_DADOSESTITEM.F_SALDO_GERAL_OE(T.ORG_IN_CODIGO,")
         Sql.Add("                                                  T.FIL_IN_CODIGO,")
@@ -4882,11 +4882,11 @@ Sub Cl_Dados_OnAfterOpen(sender as TMgClientDataSet)
 
     '// Matheus H. - Inclusão coluna em grid principal. | 22/04/2026
     nIdx =  nIdx + 1
-    FieldByName("valor_reservado_a_faturar").DisplayLabel = "Vlr. Reservado a Faturar"
-    FieldByName("valor_reservado_a_faturar").DisplayWidth = 20
-    FieldByName("valor_reservado_a_faturar").Visible      = true
-    FieldByName("valor_reservado_a_faturar").Index        = nIdx
-    TmgFloatField(FieldByName("valor_reservado_a_faturar")).DisplayFormat = "###,##0.0000"
+    FieldByName("VALOR_RESERVADO_A_FATURAR").DisplayLabel = "Vlr. Reservado a Faturar"
+    FieldByName("VALOR_RESERVADO_A_FATURAR").DisplayWidth = 20
+    FieldByName("VALOR_RESERVADO_A_FATURAR").Visible      = true
+    FieldByName("VALOR_RESERVADO_A_FATURAR").Index        = nIdx
+    TmgFloatField(FieldByName("VALOR_RESERVADO_A_FATURAR")).DisplayFormat = "###,##0.0000"
     '// Matheus H. - Inclusão coluna em grid principal. | 22/04/2026
 
     nIdx =  nIdx + 1
@@ -4964,7 +4964,7 @@ Sub Cl_Dados_OnAfterOpen(sender as TMgClientDataSet)
     TMgStringField(FieldByName("IPE_RE_QTDECONVERTIDA")).OnAfterChange = AddressOf QtdeProgrmada_OnAfterChange()
     TMgStringField(FieldByName("PED_BO_PARCIAL")).OnAfterChange        = AddressOf PedidoParcial_OnAfterChange()
 
-    '//Tv_Dados.DataController.DataModeController.GridMode = tRUE
+    '//Tv_Dados.DataController.DataModeController.GridMode = false
     Tv_Dados.DataController.CreateAllItems(True)
 
     '//MONTA AS COLUNAS CHECKBOX
@@ -5001,7 +5001,7 @@ Sub Cl_Lk_Grupos_OnAfterOpen(sender as TMgClientDataSet)
   End With
 End Sub
 
-'//Luiz T.I. 29/05/2026 16:41 | Parte 3 - Fim
+'//Luiz T.I. 10/06/2026 08:10 | Chamado 2188 Parte 3 - Fim
 Sub cCl_GrupoCliente_OnAfterOpen(Sender as TMgClientDataSet)
   Dim i As Integer
   Dim auxIndex As Integer
@@ -5033,7 +5033,7 @@ Sub cCl_GrupoCliente_OnAfterOpen(Sender as TMgClientDataSet)
     End With
   End With
 End Sub
-'//Luiz T.I. 29/05/2026 16:41 | Parte 3 - Fim
+'//Luiz T.I. 10/06/2026 08:10 | Chamado 2188 Parte 3 - Fim
 
 Sub Cl_Lk_SubGrupos_OnAfterOpen(sender as TMgClientDataSet)
   Dim nIdx
@@ -5264,7 +5264,7 @@ Sub Cl_Dados_OnBeforeOpen(sender as TMgClientDataSet)
       Sql.Add("        (T.GER_RE_QUANTIDADE - T.IPE_RE_QTDEFATURADA) IPE_RE_QTDERESFAT,")
 
       Sql.Add("(T.ITP_RE_VALORUNITARIOCONV * ")
-      Sql.Add("(T.GER_RE_QUANTIDADE - T.IPE_RE_QTDEFATURADA)) valor_reservado_a_faturar,")
+      Sql.Add("(T.GER_RE_QUANTIDADE - T.IPE_RE_QTDEFATURADA)) VALOR_RESERVADO_A_FATURAR,")   '// Matheus H. - Inclusão coluna em grid principal. | 22/04/2026
 
       Sql.Add("        NVL(CUS_PCK_DADOSESTITEM.F_SALDO_GERAL_OE(T.ORG_IN_CODIGO,")
       Sql.Add("                                                  T.FIL_IN_CODIGO,")
@@ -5982,6 +5982,7 @@ Sub Cl_Dados_OnBeforeOpen(sender as TMgClientDataSet)
         Sql.Add("                         TO_DATE(:PEMISSAO_FINAL, 'dd/mm/rrrr')")
       end if
 
+
       if FormAtivo.Gb_Pedido.Checked then
         Sql.Add("                     and PED.PED_IN_CODIGO between NVL(:PPEDIDO_INICIAL, 0) and")
         Sql.Add("                         NVL(:PPEDIDO_FINAL, 99999999)")
@@ -6028,7 +6029,7 @@ Sub Cl_Dados_OnBeforeOpen(sender as TMgClientDataSet)
         Sql.Add("                        ")
       end if
 
-      '//Luiz T.I. 29/05/2026 16:41 | Parte 4 - Início
+      '//Luiz T.I. 10/06/2026 08:10 | Chamado 2188 Parte 4 - Início
       if FormAtivo.Gb_GrupoCliente.Checked then
         Sql.Add("                    and EXISTS (")
         Sql.Add("                         SELECT 1")
@@ -6040,7 +6041,7 @@ Sub Cl_Dados_OnBeforeOpen(sender as TMgClientDataSet)
         Sql.Add("                           AND CCL.FTC_IN_CODIGO     = 6")
         Sql.Add("                           AND CCL.FCC_IN_CODIGO BETWEEN :PGRUPOCLIENTE_INICIAL AND :PGRUPOCLIENTE_FINAL)")
       end if
-      '//Luiz T.I. 29/05/2026 16:41 | Parte 4 - Fim
+      '//Luiz T.I. 10/06/2026 08:10 | Chamado 2188 Parte 4 - Fim
 
       if FormAtivo.Gb_SubGrupos.Checked then
         Sql.Add("                     and exists")
@@ -6433,7 +6434,7 @@ Sub Cl_Dados_OnBeforeOpen(sender as TMgClientDataSet)
        ParamByName("pGRUPO_FINAL").Value    = null
     end if
 
-    '//Luiz T.I. 29/05/2026 16:41 | Parte 5 - Início
+    '//Luiz T.I. 10/06/2026 08:10 | Chamado 2188 Parte 5 - Início
     if FormAtivo.Gb_GrupoCliente.Checked then
        ParamByName("PGRUPOCLIENTE_INICIAL").Value = FormAtivo.Ed_GrupoClienteInicial.Text
        ParamByName("PGRUPOCLIENTE_FINAL").Value   = FormAtivo.Ed_GrupoClienteFinal.Text
@@ -6441,7 +6442,7 @@ Sub Cl_Dados_OnBeforeOpen(sender as TMgClientDataSet)
        ParamByName("PGRUPOCLIENTE_INICIAL").Value = null
        ParamByName("PGRUPOCLIENTE_FINAL").Value   = null
     end if
-    '//Luiz T.I. 29/05/2026 16:41 | Parte 5 - Fim
+    '//Luiz T.I. 10/06/2026 08:10 | Chamado 2188 Parte 5 - Fim
 
     if FormAtivo.Gb_SubGrupos.Checked then
        ParamByName("pSUBGRUPO_INICIAL").Value  = FormAtivo.Ed_SubGruposInicial.Text
@@ -6450,19 +6451,21 @@ Sub Cl_Dados_OnBeforeOpen(sender as TMgClientDataSet)
        ParamByName("pSUBGRUPO_INICIAL").Value  = null
        ParamByName("pSUBGRUPO_FINAL").Value    = null
     end if
-    if FormAtivo.Gb_Cliente.Checked then
-     ParamByName("pCLIENTE_INICIAL").Value = FormAtivo.Ed_ClienteInicial.Text
-     ParamByName("pCLIENTE_FINAL").Value   = FormAtivo.Ed_ClienteFinal.Text
 
    /* if FormAtivo.Gb_Cliente.Checked then
-    dim x = FormAtivo.Ed_ClienteInicial.Text
-    dim y = FormAtivo.Ed_ClienteFinal.Text
+       ParamByName("pCLIENTE_INICIAL").Value  = FormAtivo.Ed_ClienteInicial.Text
+       ParamByName("pCLIENTE_FINAL").Value    = FormAtivo.Ed_ClienteFinal.Text*/
+
+   '//Gustavo 18/03/2026
+    if FormAtivo.Gb_Cliente.Checked then
+     dim x = FormAtivo.Ed_ClienteInicial.Text
+     dim y = FormAtivo.Ed_ClienteFinal.Text
+
       Try
        ParamByName("pCLIENTE_INICIAL").Value  = IntToStr(x)
        ParamByName("pCLIENTE_FINAL").Value    = IntToStr(y)
        Catch
-       ShowMessage("Chora demais")
-       End Try */
+      End Try
     else
        ParamByName("pCLIENTE_INICIAL").Value  = Null
        ParamByName("pCLIENTE_FINAL").Value    = Null
@@ -6601,8 +6604,21 @@ Sub Bt_OcorrenciaFin_OnAfterClick()
 End Sub
 
 Sub cBt_HistAltProgEntrega_OnAfterClick()
-    ExecutaForm("FORM_FS_PEDPROGENTREGA_HISTORICO").ShowModal
+    ExecutaForm("FORM_FS_ALT_PROG_ENTREGA").ShowModal
 End Sub
+
+  '// Matheus H. 09/04/2026 - Início
+Sub cBt_LogLiberacao_OnAfterClick
+  ExecutaForm("FORM_JSM_LOGLIBERACAOOE").ShowModal
+End Sub
+  '// Matheus H. 09/04/2026 - Início
+
+  '// Matheus H. 09/04/2026 - Início
+Sub cBt_LogLiberacaoPed_OnAfterClick
+  ExecutaForm("FORM_JSM_LOGLIBERACAOPED").ShowModal
+End Sub
+ '// Matheus H. 09/04/2026 - Fim
+
 
 Sub Bt_DistribuirReserva_OnAfterClick()
   vCl_DadosExecutaScroll = false
@@ -6640,20 +6656,7 @@ End Sub
 Sub Bt_LogCriacaoRomaneio_OnAfterClick
   ExecutaForm("FORM_FS_ORDEM_ROMANEIO_LOG_CRIACAO").ShowModal
 End Sub
- '// Matheus H. 25/02/2026 - Início
 
-Sub cBt_LogLiberacao_OnAfterClick
-  ExecutaForm("FORM_JSM_LOGLIBERACAOOE").ShowModal
-End Sub
-
- '// Matheus H. 25/02/2026 - Fim
-
-  '// Matheus H. 09/04/2026 - Início
-
-Sub cBt_LogLiberacaoPed_OnAfterClick
-  ExecutaForm("FORM_JSM_LOGLIBERACAOPED").ShowModal
-End Sub
- '// Matheus H. 09/04/2026 - Fim
 Sub ReservaAutomatica()
   Dim vRES_IN_SEQUENCIA
 
@@ -6830,7 +6833,7 @@ Sub Cl_DadosResevaAutomatica_OnBeforeOpen(sender as TMgClientDataSet)
        ParamByName("pGRUPO_FINAL").Value    = null
     end if
 
-    '//Luiz T.I. 29/05/2026 16:41 | Parte 6 - Início
+    '//Luiz T.I. 10/06/2026 08:10 | Chamado 2188 Parte 6 - Início
     if FormAtivo.Gb_GrupoCliente.Checked then
        ParamByName("PGRUPOCLIENTE_INICIAL").Value = FormAtivo.Ed_GrupoClienteInicial.Text
        ParamByName("PGRUPOCLIENTE_FINAL").Value   = FormAtivo.Ed_GrupoClienteFinal.Text
@@ -6838,7 +6841,7 @@ Sub Cl_DadosResevaAutomatica_OnBeforeOpen(sender as TMgClientDataSet)
        ParamByName("PGRUPOCLIENTE_INICIAL").Value = null
        ParamByName("PGRUPOCLIENTE_FINAL").Value   = null
     end if
-    '//Luiz T.I. 29/05/2026 16:41 | Parte 6 - Fim
+    '//Luiz T.I. 10/06/2026 08:10 | Chamado 2188 Parte 6 - Fim
 
     if FormAtivo.Gb_SubGrupos.Checked then
        ParamByName("pSUBGRUPO_INICIAL").Value  = FormAtivo.Ed_SubGruposInicial.Text
@@ -7037,7 +7040,7 @@ Sub Ed_GruposInicial_OnAfterExit
   End With
 End Sub
 
-'//Luiz T.I. 29/05/2026 16:41 | Parte 7 - Início
+'//Luiz T.I. 10/06/2026 08:10 | Chamado 2188 Parte 7 - Início
 Sub Ed_GrupoClienteInicial_OnAfterExit
   With FormAtivo
     Ed_GrupoClienteFinal.Text = Ed_GrupoClienteInicial.Text
@@ -7045,7 +7048,7 @@ Sub Ed_GrupoClienteInicial_OnAfterExit
     Ed_GrupoClienteFinal.SetFocus
   End With
 End Sub
-'//Luiz T.I. 29/05/2026 16:41 | Parte 7 - Fim
+'//Luiz T.I. 10/06/2026 08:10 | Chamado 2188 Parte 7 - Fim
 
 Sub Ed_SubGruposInicial_OnAfterExit
   With FormAtivo

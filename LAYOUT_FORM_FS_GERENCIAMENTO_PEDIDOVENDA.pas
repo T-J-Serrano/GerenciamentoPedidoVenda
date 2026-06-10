@@ -1,58 +1,59 @@
 inherited FORM_FS_GERENCIAMENTO_PEDIDOVENDA: TFormScriptMegaManutencao
-  Left = 6
-  Top = 9
+  Left = -8
+  Top = -8
   BorderIcons = [biSystemMenu, biMaximize]
   Caption = ''
-  ClientHeight = 560
-  ClientWidth = 1471
+  ClientHeight = 801
+  ClientWidth = 1536
   Menu = mgMainMenu1
   Position = poDesigned
-  ExplicitLeft = 6
-  ExplicitTop = 9
-  ExplicitWidth = 1487
-  ExplicitHeight = 599
+  WindowState = wsMaximized
+  ExplicitLeft = -8
+  ExplicitTop = -8
+  ExplicitWidth = 1552
+  ExplicitHeight = 840
   PixelsPerInch = 96
   TextHeight = 15
   inherited shpLinhaBottom: TMgShape
-    Top = 504
-    Width = 1471
+    Top = 745
+    Width = 1536
     ExplicitTop = 673
     ExplicitWidth = 1008
   end
   inherited Pn_Base: TmgPanel
     Top = 1
-    Width = 1471
-    Height = 500
+    Width = 1536
+    Height = 741
     ExplicitTop = 47
     ExplicitWidth = 1008
     ExplicitHeight = 641
     inherited PageControl1: TmgPageControl
-      Width = 1465
-      Height = 494
+      Width = 1530
+      Height = 735
       Properties.ActivePage = Ts_Filtros
       ActivePage = Ts_Filtros
       ExplicitLeft = 1
       ExplicitTop = -16
       ExplicitWidth = 1360
       ExplicitHeight = 593
-      ClientRectBottom = 492
-      ClientRectRight = 1463
+      ClientRectBottom = 733
+      ClientRectRight = 1528
       object Ts_Filtros: TcxTabSheet [0]
         Caption = 'Filtros'
         ExplicitLeft = 0
         ExplicitTop = 22
-        ExplicitWidth = 2040
-        ExplicitHeight = 711
+        ExplicitWidth = 1358
+        ExplicitHeight = 615
         object Pn_Top: TmgPanel
           Left = 0
           Top = 0
-          Width = 1461
+          Width = 1526
           Height = 246
           Align = alTop
           BevelOuter = bvNone
           ParentColor = True
           TabOrder = 0
-          ExplicitWidth = 2040
+          ExplicitWidth = 1358
           object Gb_SubGrupos: TmgGroupBox
             Left = 750
             Top = 0
@@ -2609,12 +2610,12 @@ inherited FORM_FS_GERENCIAMENTO_PEDIDOVENDA: TFormScriptMegaManutencao
           Left = 0
           Top = 246
           Width = 269
-          Height = 216
+          Height = 457
           Align = alLeft
           BevelOuter = bvNone
           ParentColor = True
           TabOrder = 1
-          ExplicitHeight = 485
+          ExplicitHeight = 389
           object Bt_Filtrar: TMgSpeedButton
             Left = 0
             Top = 0
@@ -2678,44 +2679,44 @@ inherited FORM_FS_GERENCIAMENTO_PEDIDOVENDA: TFormScriptMegaManutencao
       inherited Ts_Geral: TcxTabSheet
         Caption = 'PEDIDO'
         ExplicitTop = 22
-        ExplicitWidth = 2040
-        ExplicitHeight = 711
+        ExplicitWidth = 1358
+        ExplicitHeight = 615
         object mgPanel3: TmgPanel
           Left = 0
           Top = 23
-          Width = 1461
-          Height = 439
+          Width = 1526
+          Height = 680
           Align = alClient
           BevelOuter = bvNone
           Caption = 'mgPanel3'
           ParentColor = True
           TabOrder = 0
-          ExplicitWidth = 2040
-          ExplicitHeight = 688
+          ExplicitWidth = 1358
+          ExplicitHeight = 592
           object mgPanel14: TmgPanel
-            Left = 1356
+            Left = 1421
             Top = 0
             Width = 105
-            Height = 439
+            Height = 680
             Align = alRight
             BevelOuter = bvNone
             Caption = 'mgPanel14'
             ParentColor = True
             TabOrder = 0
             Visible = False
-            ExplicitLeft = 1933
-            ExplicitHeight = 680
+            ExplicitLeft = 1251
+            ExplicitHeight = 584
             object Pn_Direito: TmgPanel
               Left = 5
               Top = 0
               Width = 100
-              Height = 439
+              Height = 680
               Align = alRight
               BevelOuter = bvNone
               ParentColor = True
               TabOrder = 0
               Visible = False
-              ExplicitHeight = 680
+              ExplicitHeight = 584
               object Bt_ClassCliente: TMgSpeedButton
                 Left = 3
                 Top = 4
@@ -3120,52 +3121,52 @@ inherited FORM_FS_GERENCIAMENTO_PEDIDOVENDA: TFormScriptMegaManutencao
           object cPn_GridPedido: TmgPanel
             Left = 0
             Top = 0
-            Width = 1356
-            Height = 439
+            Width = 1421
+            Height = 680
             Align = alClient
             BevelOuter = bvNone
             Caption = 'cPn_GridPedido'
             ParentColor = True
             TabOrder = 1
-            ExplicitWidth = 2040
-            ExplicitHeight = 688
+            ExplicitWidth = 1358
+            ExplicitHeight = 592
             object mgPanel15: TmgPanel
               Left = 0
-              Top = 256
-              Width = 1356
+              Top = 497
+              Width = 1421
               Height = 183
               Align = alBottom
               BevelOuter = bvNone
               Caption = 'mgPanel15'
               ParentColor = True
               TabOrder = 0
-              ExplicitTop = 505
-              ExplicitWidth = 2040
+              ExplicitTop = 409
+              ExplicitWidth = 1358
               object mgPanel12: TmgPanel
                 Left = 0
                 Top = 7
-                Width = 1356
+                Width = 1421
                 Height = 176
                 Align = alBottom
                 BevelOuter = bvNone
                 Caption = 'mgPanel12'
                 ParentColor = True
                 TabOrder = 0
-                ExplicitWidth = 2040
+                ExplicitWidth = 1358
                 object Pn_NotaFiscal: TmgPanel
                   Left = 953
                   Top = 0
-                  Width = 403
+                  Width = 468
                   Height = 176
                   Align = alClient
                   BevelOuter = bvNone
                   ParentColor = True
                   TabOrder = 0
-                  ExplicitWidth = 1087
+                  ExplicitWidth = 405
                   object MgShape1: TMgShape
                     Left = 0
                     Top = 19
-                    Width = 403
+                    Width = 468
                     Height = 157
                     Align = alClient
                     Pen.Color = clSilver
@@ -3189,7 +3190,7 @@ inherited FORM_FS_GERENCIAMENTO_PEDIDOVENDA: TFormScriptMegaManutencao
                     StyleHot.LookAndFeel.SkinName = ''
                     Transparent = True
                     Visible = True
-                    ExplicitWidth = 1087
+                    ExplicitWidth = 405
                   end
                 end
                 object Pn_OE_Geradas: TmgPanel
@@ -3476,41 +3477,19 @@ inherited FORM_FS_GERENCIAMENTO_PEDIDOVENDA: TFormScriptMegaManutencao
                 end
               end
             end
-            object cBt_LogLiberacao: TMgSpeedButton
-              Left = 1774
-              Top = 175
-              Width = 75
-              Height = 25
-              Cursor = crHandPoint
-              Caption = 'Log Libera'#231#227'o Pedido'
-              LookAndFeel.NativeStyle = False
-              LookAndFeel.SkinName = ''
-              ParentShowHint = True
-              SpeedButtonOptions.Flat = True
-              TabOrder = 1
-              DropdownArrow = False
-              DropdownArrowWidth = 7
-              Flat = False
-              HighlightWhenDown = False
-              ImageIndex = 0
-              Opaque = False
-              RepeatDelay = 0
-              RepeatInterval = 0
-            end
           end
         end
         object pnPedidosTop: TmgPanel
           Left = 0
           Top = 0
-          Width = 1461
+          Width = 1526
           Height = 23
           Align = alTop
           BevelOuter = bvNone
           ParentColor = True
           TabOrder = 1
-          ExplicitWidth = 2550
           object Pn_Top_Bottons: TmgPanel
-            Left = 740
+            Left = 805
             Top = 0
             Width = 721
             Height = 23
@@ -3518,7 +3497,6 @@ inherited FORM_FS_GERENCIAMENTO_PEDIDOVENDA: TFormScriptMegaManutencao
             BevelOuter = bvNone
             ParentColor = True
             TabOrder = 0
-            ExplicitLeft = 1829
             object Bt_Acoes: TMgSpeedButton
               Left = 590
               Top = 0
@@ -3712,16 +3690,16 @@ inherited FORM_FS_GERENCIAMENTO_PEDIDOVENDA: TFormScriptMegaManutencao
     end
   end
   inherited Pn_ToolBar: TmgPanel
-    Top = 529
-    Width = 1471
-    ExplicitTop = 770
-    ExplicitWidth = 2048
+    Top = 770
+    Width = 1536
+    ExplicitTop = 674
+    ExplicitWidth = 1366
     inherited Pn_Aux_Left: TmgPanel
-      Width = 1471
-      ExplicitWidth = 2048
+      Width = 1536
+      ExplicitWidth = 1366
       inherited Pn_BaseBotoesAux: TmgPanel
-        Left = 1173
-        ExplicitLeft = 1750
+        Left = 1238
+        ExplicitLeft = 1068
         inherited Bo_Cancela: TMgBitBtn
           Left = 201
           LookAndFeel.SkinName = ''
@@ -3739,38 +3717,38 @@ inherited FORM_FS_GERENCIAMENTO_PEDIDOVENDA: TFormScriptMegaManutencao
         end
       end
       inherited pn_aux_right2: TmgPanel
-        Left = 1469
-        ExplicitLeft = 2046
+        Left = 1534
+        ExplicitLeft = 1364
       end
       inherited Pn_Aux_Left_Base: TmgPanel
-        Width = 1171
-        ExplicitWidth = 2044
+        Width = 1236
+        ExplicitWidth = 1362
       end
     end
   end
   inherited StatusBar1: TStatusBar
-    Top = 510
-    Width = 1471
+    Top = 751
+    Width = 1536
     ExplicitTop = 751
-    ExplicitWidth = 2048
+    ExplicitWidth = 1536
   end
   inherited Pn_SpaceBottom: TmgPanel
-    Top = 505
-    Width = 1471
+    Top = 746
+    Width = 1536
     ExplicitTop = 746
-    ExplicitWidth = 2048
+    ExplicitWidth = 1536
   end
   inherited Pn_ToolBarEdicao: TmgPanel
-    Width = 1471
+    Width = 1536
     Height = 1
     Visible = True
-    ExplicitWidth = 2048
+    ExplicitWidth = 1366
     ExplicitHeight = 1
   end
   inherited Pn_BasePesquisa: TmgPanel
-    Left = 1149
+    Left = 1214
     Top = -23
-    ExplicitLeft = 2238
+    ExplicitLeft = 1214
     ExplicitTop = -23
     inherited Ed_Pesq_Campo: TMgEdit
       Style.LookAndFeel.SkinName = ''
