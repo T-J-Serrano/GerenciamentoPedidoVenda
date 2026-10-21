@@ -3961,6 +3961,15 @@ Sub Cl_Dados_OnAfterOpen(sender as TMgClientDataSet)
     End With
     '//Luiz T.I. 23/07/2026 14:05 | Chamado 2733 Parte 1 - Fim
 
+    '//Luiz T.I. 21/10/2026 17:03 | Chamado 3580 Parte 1 - Início
+    nIdx =  nIdx + 1
+    With FieldByName("IPE_ST_SITUACAO")
+      DisplayLabel = "Status Prog. Entrega"
+      DisplayWidth = 25
+      Index        = nIdx
+    End With
+    '//Luiz T.I. 21/10/2026 17:03 | Chamado 3580 Parte 1 - Fim
+
     TMgStringField(FieldByName("PRIORIDADE")).OnAfterChange            = AddressOf Prioridade_OnAfterChange()
     TMgStringField(FieldByName("IPE_ST_STATUS")).OnAfterChange         = AddressOf StatusPedido_OnAfterChange()
     TMgStringField(FieldByName("IPE_DT_DATAENTREGA")).OnAfterChange    = AddressOf DataEntrega_OnAfterChange()
@@ -4360,6 +4369,9 @@ Sub Cl_Dados_OnBeforeOpen(sender as TMgClientDataSet)
       Sql.Add("                 DADOS.INDEFINIDO,")
       Sql.Add("                 DADOS.PED_CH_SITUACAO,")
       Sql.Add("                 DADOS.PED_ST_SITUACAO,")
+      '//Luiz T.I. 21/10/2026 17:03 | Chamado 3580 Parte 2 - Início
+      Sql.Add("                 DADOS.IPE_ST_SITUACAO,")
+      '//Luiz T.I. 21/10/2026 17:03 | Chamado 3580 Parte 2 - Fim
       Sql.Add("                 DADOS.PRIORIDADE,")
       Sql.Add("                 DADOS.IPE_ST_STATUS,")
       Sql.Add("                 DADOS.PED_ST_TIPOFRETE,")
@@ -4728,6 +4740,15 @@ Sub Cl_Dados_OnBeforeOpen(sender as TMgClientDataSet)
       Sql.Add("                            'Documento Encerrado'")
       Sql.Add("                         end PED_ST_SITUACAO,")
       Sql.Add("                         ")
+      '//Luiz T.I. 21/10/2026 17:03 | Chamado 3580 Parte 3 - Início
+      Sql.Add("                         DECODE(PRG.IPE_CH_SITUACAO")
+      Sql.Add("                             ,'A', 'Aberta'")
+      Sql.Add("                             ,'B', 'Baixada'")
+      Sql.Add("                             ,'C', 'Cancelada'")
+      Sql.Add("                             ,'E', 'Encerrada'")
+      Sql.Add("                             ,PRG.IPE_CH_SITUACAO")
+      Sql.Add("                         ) AS IPE_ST_SITUACAO,")
+      '//Luiz T.I. 21/10/2026 17:03 | Chamado 3580 Parte 3 - Fim
       Sql.Add("                         cast(case NVL(GER.PED_IN_PRIORIDADE, 0)")
       Sql.Add("                                when 9 then")
       Sql.Add("                                 '9-Exportação'")
@@ -5164,6 +5185,10 @@ Sub Cl_Dados_OnBeforeOpen(sender as TMgClientDataSet)
         Sql.Add("                            DECODE(PRG.IPE_CH_SITUACAO,")
         Sql.Add("                                   'A',")
         Sql.Add("                                   'Pedido em Aberto Pedido Faturado Parcialmente',")
+        '//Luiz T.I. 21/10/2026 17:03 | Chamado 3580 Parte 4 - Início
+        Sql.Add("                                   'B', 'Pedido Faturado Parcialmente',")
+        Sql.Add("                                   'C', 'Pedido Cancelado Pedido Faturado Parcialmente',")
+        '//Luiz T.I. 21/10/2026 17:03 | Chamado 3580 Parte 4 - Fim
         Sql.Add("                                   'N')")
         Sql.Add("                           when 'F' then")
         Sql.Add("                            'Pedido Faturado Totalmente'")
