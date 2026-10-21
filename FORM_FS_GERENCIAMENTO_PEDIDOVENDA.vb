@@ -847,7 +847,7 @@ Sub OnFormCreate
         SQL.Clear
         SQL.Add("  SELECT *                                                                                ")
         SQL.Add("    FROM EST_PRODUTOS                                                                     ")
-        SQL.Add("   WHERE GRU_IDE_ST_CODIGO IN('03','04','05')                                             ")
+        SQL.Add("   WHERE GRU_IDE_ST_CODIGO IN('03','04','05', '00')                                       ") '//William T.I - 29/09/2026 - Chamado: 3249 - Filtrar mercadoria de revenda
         SQL.Add("     AND GRU_IN_CODIGO BETWEEN NVL(:pSUBGRUPO_INICIAL,0) AND NVL(:pSUBGRUPO_FINAL,999999) ")
         SQL.Add("ORDER BY PRO_IN_CODIGO,PRO_ST_ALTERNATIVO,PRO_ST_DESCRICAO                                ")
         OnBeforeOpen = AddressOf Cl_Lk_Itens_OnBeforeOpen()
