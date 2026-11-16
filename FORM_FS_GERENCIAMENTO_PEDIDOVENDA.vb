@@ -1,4 +1,4 @@
-'// Objetos para Popular a Guia de Pedido
+                                                                                                                                                                                                '// Objetos para Popular a Guia de Pedido
 Dim Tv_Dados, Gd_Dados, Pn_Grid
 
 '// Lookups para os campos de filtro
@@ -3770,6 +3770,16 @@ Sub Cl_Dados_OnAfterOpen(sender as TMgClientDataSet)
     FieldByName("PRO_ST_DESCRICAO").Visible      = true
     FieldByName("PRO_ST_DESCRICAO").Index        = nIdx
 
+    '//William T.I - 16/11/2026 - Chamado: 3726 - Adicionar coluna narrativa para facilitar na conferencia de exportação
+    nIdx =  nIdx + 1
+    With FieldByName("PRO_ST_NARRATIVA")
+      DisplayLabel = "Narrativa"
+      DisplayWidth = 30
+      Visible      = true
+      Index        = nIdx
+    End With
+    '//William T.I - 16/11/2026 - Chamado: 3726 - Fim
+
     nIdx =  nIdx + 1
     FieldByName("UNI_ST_UNIDADE").DisplayLabel = "Un."
     FieldByName("UNI_ST_UNIDADE").DisplayWidth = 5
@@ -3969,6 +3979,7 @@ Sub Cl_Dados_OnAfterOpen(sender as TMgClientDataSet)
       Index        = nIdx
     End With
     '//Luiz T.I. 21/10/2026 17:03 | Chamado 3580 Parte 1 - Fim
+
 
     TMgStringField(FieldByName("PRIORIDADE")).OnAfterChange            = AddressOf Prioridade_OnAfterChange()
     TMgStringField(FieldByName("IPE_ST_STATUS")).OnAfterChange         = AddressOf StatusPedido_OnAfterChange()
@@ -4322,6 +4333,7 @@ Sub Cl_Dados_OnBeforeOpen(sender as TMgClientDataSet)
       Sql.Add("                 DADOS.SUB_GRUPO,")
       Sql.Add("                 DADOS.PRO_ST_ALTERNATIVO,")
       Sql.Add("                 DADOS.PRO_ST_DESCRICAO,")
+      Sql.Add("                 DADOS.PRO_ST_NARRATIVA,")
       Sql.Add("                 DADOS.UNI_ST_ORIGINAL UNI_ST_UNIDADE,")
 
       Sql.Add("                 FS_FNC_CONVERTE_M2_PC(DADOS.PRO_TAB_IN_CODIGO,")
@@ -4585,6 +4597,7 @@ Sub Cl_Dados_OnBeforeOpen(sender as TMgClientDataSet)
       Sql.Add("                         PRO.GRU_IN_CODIGO SUB_GRUPO,")
       Sql.Add("                         PRO.PRO_ST_ALTERNATIVO PRO_ST_ALTERNATIVO,")
       Sql.Add("                         PRO.PRO_ST_DESCRICAO PRO_ST_DESCRICAO,")
+      Sql.Add("                         PRO.PRO_ST_NARRATIVA PRO_ST_NARRATIVA,")
       Sql.Add("                         ITE.UNI_ST_UNIDADE UNI_ST_UNIDADE,")
       Sql.Add("                         ITE.ITP_RE_QUANTIDADE ITP_RE_QUANTIDADE,")
       Sql.Add("                         ITE.ITP_IN_SEQUENCIA ITP_IN_SEQUENCIA,")
@@ -5282,6 +5295,7 @@ Sub Cl_Dados_OnBeforeOpen(sender as TMgClientDataSet)
       Sql.Add("                            PRO.GRU_IN_CODIGO,")
       Sql.Add("                            PRO.PRO_ST_ALTERNATIVO,")
       Sql.Add("                            PRO.PRO_ST_DESCRICAO,")
+      Sql.Add("                            PRO.PRO_ST_NARRATIVA,")
       Sql.Add("                            ITE.UNI_ST_UNIDADE,")
       Sql.Add("                            ITE.ITP_RE_QUANTIDADE,")
       Sql.Add("                            ITE.ITP_IN_SEQUENCIA,")
